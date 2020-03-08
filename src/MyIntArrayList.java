@@ -9,8 +9,26 @@ public class MyIntArrayList {
         this(10);
     }
 
+    public MyIntArrayList(MyIntArrayList c) {
+        this.size = c.size;
+        this.elements = c.elements;
+    }
+
     public MyIntArrayList(int initialCapacity) {
         this.elements = new int[initialCapacity];
+    }
+
+    public void add(int index, int element) {
+        if (index > this.size || index < 0) {
+            System.out.println("Throwing IndexOutOfBoundsException when trying to add" +
+                    " the element " + element + " at position " + index);
+        } else {
+            this.size++;
+            for (int i = index + 1; i < size - 1; i++) {
+                elements[i + 1] = elements[i];
+            }
+            elements[index] = element;
+        }
     }
 
     public boolean add(int e) {
@@ -29,7 +47,7 @@ public class MyIntArrayList {
     }
 
     public int indexOf(int e) {
-        for (int i=0; i<this.size; i++) {
+        for (int i = 0; i < this.size; i++) {
             if (this.elements[i] == e) {
                 return i;
             }
@@ -46,8 +64,8 @@ public class MyIntArrayList {
         }
 
         int removedElement = this.elements[index];
-        for (int i=index; i<this.size; i++) {
-            this.elements[i] = this.elements[i+1];
+        for (int i = index; i < this.size; i++) {
+            this.elements[i] = this.elements[i + 1];
         }
         this.size--;
 
@@ -69,6 +87,12 @@ public class MyIntArrayList {
         int replacedElement = this.elements[index];
         this.elements[index] = e;
         return replacedElement;
+    }
+
+    public void printArray(){
+        for(int i=0;i<size;i++){
+            System.out.println();
+        }
     }
 
 }
